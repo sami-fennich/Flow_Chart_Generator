@@ -2498,6 +2498,9 @@ def main(pcap_file, filter_str):
                         output+=capture_pretty_print(packet.layers[-2]).replace('"',"'")
                     except:
                         output+=capture_pretty_print(packet.layers[-1]).replace('"',"'")
+                else:
+                    output+=capture_pretty_print(packet.layers[-1]).replace('"',"'")
+
                 output+='\n'+'-' * 124 + '\n'
                 
 
