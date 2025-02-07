@@ -446,35 +446,6 @@ def exit_application():
     global ip_hostname_map
     import os
 
-    try:
-        host_file_path = script_location+'\\hosts.txt'
-        with open(host_file_path, 'w') as file:
-            # Loop over items in the dictionary
-            for key, value in ip_hostname_map.items():
-                # Write the key and value to the file, separated by a space
-                file.write(f'{key} {value}\n')        
-    except:
-        a=0     
-    if 'Fennich' in os.path.expanduser( '~' ) or 'samif' in os.path.expanduser( '~' ):       
-        try:
-            host_file_path = os.path.expanduser( '~' )+'\\AppData\\Roaming\\Wireshark\\hosts'
-            with open(host_file_path, 'w') as file:
-                # Loop over items in the dictionary
-                for key, value in ip_hostname_map.items():
-                    # Write the key and value to the file, separated by a space
-                    file.write(f'{key} {value}\n')        
-        except:
-            a=0 
-        try:
-            if script_location !=os.path.realpath(os.path.dirname(__file__)):
-                host_file_path = os.path.realpath(os.path.dirname(__file__))+'\\hosts.txt'
-                with open(host_file_path, 'w') as file:
-                    # Loop over items in the dictionary
-                    for key, value in ip_hostname_map.items():
-                        # Write the key and value to the file, separated by a space
-                        file.write(f'{key} {value}\n')        
-        except:
-            a=0             
     root.destroy()
 
 def edit_chart():
@@ -2341,31 +2312,13 @@ mscgen_output = "xu {\n hscale=\"1.4\", wordwraparcs=on, width=\"auto\";\n\n"
 nodes = set()
 
 
-script_location=os.path.expanduser( '~' )+'\\Flow_Chart_Generator'
-if 'Fennich' in script_location:
-    try:
-        host_file_path = script_location+'\\hosts.txt'
-        ip_hostname_map = read_reverse_host_file(host_file_path)
-    except:
-        try:
-            host_file_path =   os.path.expanduser( '~' )+'\\AppData\\Roaming\\Wireshark\\hosts'
-            ip_hostname_map = read_host_file(host_file_path)
-        except:
-            try:
-                host_file_path =   'C:\\Users\\Sami.Fennich\\Downloads\\WiresharkPortable64\\Data\\hosts'
-                ip_hostname_map = read_reverse_host_file(host_file_path)
-            except:
-                ip_hostname_map ={}
-else:
-    try:
-        host_file_path =   os.path.expanduser( '~' )+'\\AppData\\Roaming\\Wireshark\\hosts'
-        ip_hostname_map = read_host_file(host_file_path)
-    except:    
-        try:
-            host_file_path = script_location+'\\hosts.txt'
-            ip_hostname_map = read_reverse_host_file(host_file_path)
-        except:
-            ip_hostname_map ={}
+script_location=os.path.dirname(os.path.abspath(__file__))
+try:
+    host_file_path = script_location+'\\hosts.txt'
+    ip_hostname_map = read_reverse_host_file(host_file_path)
+except:
+    ip_hostname_map ={} 
+
 
 
 
