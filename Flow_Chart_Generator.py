@@ -1974,15 +1974,16 @@ def create_gui():
     
     predefined_filter_label = tk.Label(frame, text="Predefined Filters:", font=("Arial", 12))
     predefined_filter_label.grid(row=1, column=0, pady=10, sticky='w')
-    predefined_filter_label.config(state=tk.DISABLED)
+    #predefined_filter_label.config(state=tk.DISABLED)
 
     predefined_filter_combo = ttk.Combobox(frame, values=list(predefined_filters.keys()), state="readonly")
     predefined_filter_combo.grid(row=1, column=1, pady=10, sticky='w')
+    createToolTip(predefined_filter_label, 'Predefined filters imported from wireshark_filter.ini')
    
 
     predefined_filter_combo.bind("<<ComboboxSelected>>", update_filter_entry)
 
-    filter_label = tk.Label(frame, text="Filter String:", font=("Arial", 12), state=tk.DISABLED)
+    filter_label = tk.Label(frame, text="Filter String:", font=("Arial", 12))
     filter_label.grid(row=2, column=0, pady=10, sticky='w')
     createToolTip(filter_label, 'Wireshark filter to be applied when importing a pcap file(s)')
 
@@ -1999,8 +2000,8 @@ def create_gui():
         # Set the corresponding dictionary value to the filter_entry content
         filter_entry.delete("1.0", tk.END)  # Clear any existing content in the filter_entry
         filter_entry.insert("1.0", predefined_filters[first_key])     
-    filter_entry.config(state=tk.DISABLED)
-    predefined_filter_combo.config(state=tk.DISABLED)
+    #filter_entry.config(state=tk.DISABLED)
+    #predefined_filter_combo.config(state=tk.DISABLED)
     add_filter_frame = tk.Frame(frame)
     add_filter_frame.grid(row=4, column=0, pady=10, sticky='w')
 
