@@ -1978,7 +1978,8 @@ def create_gui():
 
     predefined_filter_combo = ttk.Combobox(frame, values=list(predefined_filters.keys()), state="readonly")
     predefined_filter_combo.grid(row=1, column=1, pady=10, sticky='w')
-    predefined_filter_combo.config(state=tk.DISABLED)
+   
+
     predefined_filter_combo.bind("<<ComboboxSelected>>", update_filter_entry)
 
     filter_label = tk.Label(frame, text="Filter String:", font=("Arial", 12), state=tk.DISABLED)
@@ -1988,7 +1989,18 @@ def create_gui():
     filter_entry = tk.Text(frame, width=60, height=5, font=("Courier New", 12), wrap="word")
  
     filter_entry.grid(row=3, column=0, pady=10, sticky='w')
+    if predefined_filters:
+        # Get the first key from the dictionary
+        first_key = list(predefined_filters.keys())[0]
+        
+        # Set the first key as the selected value in the combobox
+        predefined_filter_combo.set(first_key)
+        
+        # Set the corresponding dictionary value to the filter_entry content
+        filter_entry.delete("1.0", tk.END)  # Clear any existing content in the filter_entry
+        filter_entry.insert("1.0", predefined_filters[first_key])     
     filter_entry.config(state=tk.DISABLED)
+    predefined_filter_combo.config(state=tk.DISABLED)
     add_filter_frame = tk.Frame(frame)
     add_filter_frame.grid(row=4, column=0, pady=10, sticky='w')
 
