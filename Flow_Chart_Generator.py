@@ -1221,7 +1221,7 @@ def create_edit_chart_window():
 
     def get_parameter_value(parameter_name, string):
         import re
-        pattern = f"\n\t{re.escape(parameter_name)}: (.*?)(?=\n\t|\Z)"
+        pattern = f"\n\t{re.escape(parameter_name)}: (.*?)(?=\n\t|\\Z)"
         results = re.findall(pattern, string, re.DOTALL)
         return '\\n'.join(results)
 
